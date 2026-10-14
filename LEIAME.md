@@ -1,16 +1,9 @@
 # FVO · Projetos Sociais
 
-Página estática (HTML + CSS, sem build).
+Página em um único arquivo: as imagens estão embutidas no index.html.
 
 ## Subir no Vercel
-1. Em vercel.com, clique em Add New › Project.
-2. Arraste esta pasta (ou suba para um repositório no GitHub e importe).
-3. Framework Preset: "Other". Sem build command, sem output directory.
+1. Descompacte este zip.
+2. Em vercel.com › Add New › Project, arraste a pasta descompactada.
+3. Framework Preset: "Other". Sem build command.
 4. Deploy.
-
-## Estrutura
-- index.html: a página inteira (estilos no próprio arquivo)
-- assets/img/: logos, laço da marca e fotos das ONGs
-- vercel.json: URLs limpas e cache das imagens
-
-Fotos: site da Bigodes do Bunker e Instagram @caonossorj.
