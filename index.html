@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projetos Sociais | FVO Alimentos</title>
+  <meta name="description" content="Conheça as ONGs parceiras da FVO Alimentos: a Bigodes do Bunker, que resgata gatos no Rio de Janeiro, e a Cão Nosso, que apoia protetores de cães em comunidades carentes.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="FVO Alimentos">
+  <meta property="og:title" content="Projetos Sociais | FVO Alimentos">
+  <meta property="og:description" content="Nutrir laços também é cuidar de quem ainda não tem casa. Conheça as ONGs parceiras da FVO.">
+  <meta property="og:image" content="assets/img/bigodes-filhotes.jpg">
+  <meta name="theme-color" content="#001f7c">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul-fvo: #001f7c;
+      --azul-process: #008dff;
+      --azul-claro: #1ab2e8;
+      --branco-fvo: #f2f5f7;
+      --azul-rodape: #102b84;
+      --texto: #23315e;
+      --texto-suave: #3d4b7a;
+      --chip: #e5f3ff;
+      --verde-ra: #004d37;
+      --max: 1100px;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Nunito", system-ui, sans-serif; color: var(--azul-fvo); background: #fff; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--azul-claro); outline-offset: 3px; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .pular { position: absolute; left: -9999px; top: 0; background: #fff; padding: 12px 16px; z-index: 100; }
+    .pular:focus { left: 16px; top: 16px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+    /* ============ CABEÇALHO (igual ao site) ============ */
+    .cab { position: relative; z-index: 50; }
+    .cab-topo { position: relative; z-index: 2; background: var(--azul-fvo); border-radius: 0 0 50px 50px; }
+    .cab-topo .wrap { height: 120px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cab-logo img { width: 216px; height: auto; }
+    .cab-acoes { display: flex; align-items: center; gap: 36px; }
+    .sociais { display: flex; gap: 12px; list-style: none; margin: 0; padding: 0; }
+    .sociais a { width: 36px; height: 36px; border-radius: 50%; background: #fff; color: var(--azul-fvo); display: grid; place-items: center; transition: transform .25s var(--ease), background .25s; }
+    .sociais a:hover { transform: translateY(-2px); background: var(--azul-claro); color: #fff; }
+    .sociais svg { width: 18px; height: 18px; }
+    .busca { display: flex; height: 40px; }
+    .busca input { width: 195px; border: 0; border-radius: 30px 0 0 30px; padding: 0 10px; font: 700 17px "Nunito", sans-serif; color: var(--azul-fvo); }
+    .busca input::placeholder { color: #3b3b3b; }
+    .busca button { width: 52px; border: 0; border-radius: 0 30px 30px 0; background: var(--azul-process); color: #fff; display: grid; place-items: center; cursor: pointer; }
+    .busca button svg { width: 24px; height: 24px; }
+    .idioma { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; font-size: 17px; text-decoration: none; }
+    .idioma svg { width: 18px; height: 18px; }
+
+    .cab-menu { background: var(--azul-process); border-radius: 0 0 50px 50px; margin-top: -60px; padding-top: 60px; }
+    .menu { display: flex; justify-content: center; gap: 0 64px; list-style: none; margin: 0; padding: 0; height: 60px; }
+    .menu > li { position: relative; display: flex; }
+    .menu > li > a { display: flex; align-items: center; gap: 6px; color: #fff; text-decoration: none; text-transform: uppercase; font-size: 16px; font-weight: 800; letter-spacing: .01em; }
+    .menu > li > a .seta { width: 10px; height: 10px; transition: transform .25s; }
+    .menu > li:hover > a .seta, .menu > li:focus-within > a .seta { transform: rotate(180deg); }
+    .sub { position: absolute; top: 60px; left: 50%; transform: translate(-50%, -8px); min-width: 230px; list-style: none; margin: 0; padding: 6px 0 14px; background: var(--azul-process); border-radius: 0 0 30px 30px; opacity: 0; visibility: hidden; transition: opacity .25s, transform .3s var(--ease), visibility .25s; box-shadow: 0 18px 30px rgba(0, 31, 124, .18); }
+    .menu > li:hover .sub, .menu > li:focus-within .sub, .menu > li.aberto .sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+    .sub a { display: block; padding: 13px 20px; color: #fff; text-decoration: none; font-size: 14px; font-weight: 800; white-space: nowrap; transition: background .2s; }
+    .sub a:hover { background: rgba(0, 31, 124, .25); }
+    .sub a[aria-current="page"] { position: relative; }
+    .sub a[aria-current="page"]::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 10px; border-radius: 50%; background: #fff; vertical-align: 1px; }
+    .menu > li.atual > a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 12px; height: 3px; border-radius: 3px; background: #fff; }
+
+    .botao-menu { display: none; width: 48px; height: 48px; border: 0; border-radius: 50%; background: var(--azul-process); color: #fff; cursor: pointer; place-items: center; }
+    .botao-menu svg { width: 24px; height: 24px; }
+
+    /* ============ HERO ============ */
+    .hero { position: relative; background: linear-gradient(180deg, #fff 0%, var(--branco-fvo) 100%); margin-top: -60px; padding: 120px 0 140px; overflow: hidden; }
+    .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 40px; }
+    .trilha { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; font-weight: 700; color: var(--texto-suave); margin-bottom: 36px; }
+    .trilha a { color: var(--texto-suave); }
+    .trilha a:hover { color: var(--azul-process); }
+    .trilha [aria-current] { color: var(--azul-fvo); }
+    .sobretitulo { margin: 0 0 14px; font-size: 14px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: #0062c4; }
+    .hero h1 { margin: 0; font-size: clamp(38px, 5vw, 60px); line-height: 1.04; font-weight: 900; color: var(--azul-fvo); }
+    .hero h1 span { display: block; color: var(--azul-process); }
+    .hero .lead { margin: 24px 0 32px; max-width: 470px; font-size: 19px; line-height: 1.55; color: var(--texto); }
+    .ancoras { display: flex; flex-wrap: wrap; gap: 12px; }
+    .ancora { display: inline-flex; align-items: center; gap: 12px; min-height: 52px; padding: 6px 20px 6px 6px; border-radius: 999px; background: #fff; box-shadow: 0 10px 24px rgba(0, 31, 124, .10); text-decoration: none; font-weight: 800; font-size: 15px; color: var(--azul-fvo); transition: transform .3s var(--ease), box-shadow .3s; }
+    .ancora:hover { transform: translateY(-3px); box-shadow: 0 16px 30px rgba(0, 31, 124, .16); }
+    .ancora img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+
+    .hero-arte { position: relative; aspect-ratio: 1 / 1; max-width: 560px; justify-self: end; width: 100%; }
+    .foto-hero { position: absolute; overflow: hidden; box-shadow: 0 24px 50px rgba(0, 31, 124, .22); }
+    .foto-hero img { width: 100%; height: 100%; object-fit: cover; }
+    .foto-1 { inset: 6% 4% 18% 14%; border-radius: 48% 52% 46% 54% / 52% 44% 56% 48%; animation: bolha 14s ease-in-out infinite alternate; }
+    .foto-2 { width: 36%; aspect-ratio: 1; left: 0; bottom: 4%; border-radius: 50%; border: 8px solid #fff; animation: flutua 7s ease-in-out infinite alternate; }
+    .foto-3 { width: 26%; aspect-ratio: 1; right: 0; top: 0; border-radius: 50%; border: 6px solid #fff; animation: flutua 8s ease-in-out -3s infinite alternate; }
+    .onda { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 120px; }
+
+    @keyframes bolha { to { border-radius: 54% 46% 52% 48% / 46% 56% 44% 54%; } }
+    @keyframes flutua { from { transform: translateY(0); } to { transform: translateY(-14px); } }
+
+    /* ============ POR QUE ============ */
+    .porque { background: var(--azul-fvo); color: #fff; padding: 40px 0 110px; position: relative; overflow: hidden; }
+    .porque .wrap { position: relative; z-index: 1; }
+    .porque-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px 72px; align-items: start; }
+    .porque h2 { margin: 0; font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; font-weight: 500; color: var(--azul-claro); }
+    .porque h2 strong { display: block; font-weight: 900; color: #fff; }
+    .porque .texto { color: #e6ecfb; }
+    .texto { display: flex; flex-direction: column; gap: 14px; font-size: 17px; line-height: 1.65; color: var(--texto); }
+    .texto p { margin: 0; }
+    .frentes { list-style: none; margin: 64px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .frentes li { background: rgba(255, 255, 255, .06); border: 1px solid rgba(255, 255, 255, .14); border-radius: 26px; padding: 26px 22px; transition: background .3s, transform .4s var(--ease); }
+    .frentes li:hover { background: rgba(26, 178, 232, .14); transform: translateY(-4px); }
+    .frentes .icone { width: 52px; height: 52px; border-radius: 16px; background: var(--azul-process); display: grid; place-items: center; margin-bottom: 18px; }
+    .frentes .icone svg { width: 26px; height: 26px; color: #fff; }
+    .frentes h3 { margin: 0 0 6px; font-size: 19px; font-weight: 900; }
+    .frentes p { margin: 0; font-size: 15px; line-height: 1.5; color: #c9d4f4; }
+
+    /* ============ ONGS ============ */
+    .ongs { position: relative; background: var(--branco-fvo); padding: 100px 0 80px; overflow: hidden; }
+    .ongs-cabeca { text-align: center; margin-bottom: 56px; position: relative; z-index: 1; }
+    .ongs-cabeca h2 { margin: 0; font-size: clamp(32px, 4vw, 50px); line-height: 1.05; font-weight: 900; }
+    .ongs-cabeca h2 span { color: var(--azul-process); }
+    .ongs-cabeca p { margin: 14px auto 0; max-width: 560px; font-size: 18px; line-height: 1.55; color: var(--texto); }
+
+    .ong { position: relative; z-index: 1; background: #fff; border-radius: 36px; padding: clamp(24px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 44px 56px; margin-bottom: 48px; box-shadow: 0 26px 60px rgba(0, 31, 124, .08); scroll-margin-top: 24px; }
+    .ong.invertida .ong-midia { order: 2; }
+    .ong-info { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+    .ong-cabeca { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+    .ong-logo { width: 92px; height: 92px; border-radius: 50%; object-fit: contain; background: #fff; border: 1px solid #dfe5f2; flex: none; }
+    .ong-logo.cheio { object-fit: cover; border: 0; }
+    .ong h3 { margin: 0 0 8px; font-size: 34px; line-height: 1.05; font-weight: 900; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; font-size: 13px; font-weight: 800; }
+    .chips li { background: var(--chip); padding: 6px 12px; border-radius: 999px; }
+    .numeros { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .numero { background: var(--branco-fvo); border-radius: 22px; padding: 18px 20px; }
+    .numero strong { display: block; font-size: 32px; line-height: 1; font-weight: 900; color: var(--azul-process); }
+    .numero span { display: block; margin-top: 6px; font-size: 14px; font-weight: 700; color: var(--texto-suave); line-height: 1.35; }
+
+    blockquote { position: relative; margin: 0; padding: 24px 26px 22px 64px; background: var(--azul-fvo); color: #fff; border-radius: 26px; font-size: 18px; line-height: 1.5; font-weight: 700; }
+    blockquote::before { content: "“"; position: absolute; left: 20px; top: 6px; font-size: 72px; line-height: 1; font-weight: 900; color: var(--azul-claro); }
+    blockquote p { margin: 0; }
+    blockquote footer { margin-top: 10px; font-size: 14px; font-weight: 600; color: #b9c6ee; }
+
+    .ajuda-titulo { margin: 0 0 4px; font-size: 15px; font-weight: 900; }
+    .ajuda-texto { margin: 0 0 14px; font-size: 16px; line-height: 1.5; color: var(--texto); }
+    .pilulas { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pilula { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 2px solid var(--azul-fvo); border-radius: 999px; font-size: 15px; font-weight: 800; text-decoration: none; transition: background .2s, color .2s; }
+    .pilula:hover { background: var(--azul-fvo); color: #fff; }
+    .botoes { display: flex; flex-wrap: wrap; gap: 12px; }
+    .botao { display: inline-flex; align-items: center; gap: 10px; min-height: 50px; padding: 0 24px; background: var(--azul-process); color: #fff; border-radius: 999px; font-size: 15px; font-weight: 900; text-decoration: none; transition: background .25s, transform .3s var(--ease); }
+    .botao:hover { background: var(--azul-fvo); transform: translateY(-2px); }
+    .botao.escuro { background: var(--azul-fvo); }
+    .botao.escuro:hover { background: var(--azul-process); }
+    .botao svg { width: 18px; height: 18px; flex: none; }
+
+    .ong-midia { position: relative; min-width: 0; }
+    .mosaico { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto; gap: 12px; }
+    .mosaico figure { margin: 0; overflow: hidden; border-radius: 24px; }
+    .mosaico img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .mosaico figure:hover img { transform: scale(1.05); }
+    .mosaico .grande { grid-column: 1 / -1; aspect-ratio: 4 / 3.1; }
+    .mosaico .mini { aspect-ratio: 1; }
+    .selo { position: absolute; top: 18px; left: 18px; background: #fff; color: var(--azul-fvo); border-radius: 999px; padding: 10px 16px; font-weight: 900; font-size: 14px; box-shadow: 0 10px 20px rgba(0, 31, 124, .14); display: flex; align-items: center; gap: 8px; }
+    .selo svg { width: 18px; height: 18px; color: var(--azul-process); }
+
+    .polaroides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding: 10px 6px 0; }
+    .polaroides a { display: block; background: #fff; padding: 10px; border-radius: 18px; box-shadow: 0 14px 30px rgba(0, 31, 124, .14); transition: transform .45s var(--ease), box-shadow .3s; }
+    .polaroides a:nth-child(1) { transform: rotate(-3deg); }
+    .polaroides a:nth-child(2) { transform: rotate(2.5deg) translateY(14px); }
+    .polaroides a:nth-child(3) { transform: rotate(2deg); }
+    .polaroides a:nth-child(4) { transform: rotate(-2.5deg) translateY(14px); }
+    .polaroides a:hover { transform: rotate(0) translateY(-6px) scale(1.03); box-shadow: 0 22px 40px rgba(0, 31, 124, .2); z-index: 2; position: relative; }
+    .polaroides img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+    .credito { margin: 22px 0 0; font-size: 13px; font-weight: 700; color: var(--texto-suave); text-align: center; }
+
+    /* ============ CHAMADA ============ */
+    .chamada { position: relative; background: var(--azul-fvo); color: #fff; padding: 110px 0 100px; overflow: hidden; }
+    .chamada .onda-topo { position: absolute; top: -1px; left: 0; width: 100%; height: 90px; z-index: 1; }
+    .chamada .wrap { position: relative; z-index: 2; }
+    .chamada-cabeca { max-width: 560px; margin: 0 0 44px; }
+    .chamada .cartoes { max-width: 620px; grid-template-columns: minmax(0, 1fr); }
+    .chamada .aviso { text-align: left; max-width: 620px; }
+    .chamada h2 { margin: 0; font-size: clamp(34px, 4.4vw, 54px); line-height: 1.04; font-weight: 500; color: var(--azul-claro); }
+    .chamada h2 strong { font-weight: 900; color: #fff; }
+    .chamada-cabeca p { margin: 16px 0 0; font-size: 18px; line-height: 1.6; color: #e6ecfb; }
+    .cartoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .cartao { display: flex; align-items: center; gap: 20px; padding: 22px; border-radius: 30px; background: #fff; color: var(--azul-fvo); text-decoration: none; transition: transform .4s var(--ease), box-shadow .3s; }
+    .cartao:hover { transform: translateY(-5px); box-shadow: 0 24px 40px rgba(0, 0, 0, .25); }
+    .cartao img { width: 92px; height: 92px; border-radius: 22px; object-fit: cover; flex: none; }
+    .cartao strong { display: block; font-size: 22px; font-weight: 900; }
+    .cartao span { display: block; margin-top: 4px; font-size: 15px; font-weight: 600; color: var(--texto-suave); line-height: 1.4; }
+    .cartao .vai { margin-left: auto; width: 48px; height: 48px; border-radius: 50%; background: var(--azul-process); color: #fff; display: grid; place-items: center; flex: none; transition: transform .3s var(--ease); }
+    .cartao:hover .vai { transform: translateX(4px); }
+    .cartao .vai svg { width: 22px; height: 22px; }
+    .aviso { margin: 32px 0 0; text-align: center; font-size: 14px; color: #b9c6ee; }
+    /* Laço da marca: entra pela direita, sangrando para fora do bloco, como no guia */
+    .laco-chamada { position: absolute; right: -140px; top: 50%; width: 760px; max-width: 62vw; pointer-events: none; opacity: 0; transform: translate(80px, -42%) rotate(14deg) scale(.92); transition: opacity 1.2s var(--ease), transform 1.6s var(--ease); }
+    .laco-chamada.visivel { opacity: 1; transform: translate(0, -50%) rotate(0) scale(1); }
+    .laco-chamada img { width: 100%; height: auto; animation: laco-respira 9s ease-in-out 1.6s infinite alternate; transform-origin: 40% 55%; }
+    @keyframes laco-respira { from { transform: rotate(0) translateY(0); } to { transform: rotate(-4deg) translateY(-16px); } }
+
+    /* ============ RODAPÉ (igual ao site) ============ */
+    .rod { background: var(--azul-rodape); color: #fff; }
+    .rod-principal { display: grid; grid-template-columns: 196px 200px 250px 1fr; gap: 32px; align-items: start; padding-top: 44px; padding-bottom: 40px; }
+    .rod-logo img { width: 160px; height: auto; }
+    .ra { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 156px; height: 76px; margin-top: 22px; background: var(--verde-ra); border-radius: 8px; text-decoration: none; color: #fff; text-align: center; font-size: 11px; font-weight: 800; line-height: 1.2; }
+    .ra img { width: 118px; height: auto; }
+    .rod-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+    .rod-links a { color: #fff; text-decoration: none; text-transform: uppercase; font-size: 16px; transition: color .2s; }
+    .rod-links a:hover { color: #b9c6ee; }
+    .rod-contato h2 { margin: 0 0 14px; font-size: 15px; font-weight: 800; text-transform: uppercase; }
+    .rod-contato a { display: flex; align-items: center; gap: 12px; color: #fff; text-decoration: none; }
+    .rod-contato .tel { font-size: 20px; font-weight: 800; margin-bottom: 14px; }
+    .rod-contato .mail { font-size: 16px; }
+    .rod-contato .ic { width: 28px; height: 28px; border-radius: 50%; background: #fff; color: var(--azul-rodape); display: grid; place-items: center; flex: none; }
+    .rod-contato .ic svg { width: 15px; height: 15px; }
+    .rod-contato p { margin: 18px 0 0 8px; font-size: 14px; line-height: 1.55; }
+    .rod-conecte { position: relative; display: flex; align-items: center; justify-content: flex-end; min-height: 210px; }
+    .rod-conecte img { position: absolute; right: 230px; top: -18px; width: 150px; height: auto; z-index: 2; }
+    .conecte-card { position: relative; z-index: 1; background: #fff; color: #111; border-radius: 20px; padding: 18px 14px 22px 70px; text-align: center; }
+    .conecte-card h2 { margin: 0 0 12px; font-size: 20px; font-weight: 900; text-transform: uppercase; white-space: nowrap; }
+    .conecte-card .sociais { justify-content: center; }
+    .conecte-card .sociais a { background: var(--azul-process); color: #fff; }
+    .conecte-card .sociais a:hover { background: var(--azul-fvo); }
+    .rod-legal { background: var(--azul-process); }
+    .rod-legal ul { list-style: none; margin: 0 auto; padding: 22px 24px; max-width: 1200px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 0; }
+    .rod-legal li { display: flex; align-items: center; }
+    .rod-legal li + li::before { content: ""; width: 1px; height: 14px; background: rgba(255, 255, 255, .8); margin: 0 13px; }
+    .rod-legal a { color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .rod-legal a:hover { text-decoration: underline; }
+    .rod-copy { background: #fff; color: var(--azul-rodape); text-align: center; padding: 14px 24px; font-size: 15px; font-style: italic; font-weight: 600; margin: 0; }
+
+    /* ============ REVELAR NO SCROLL ============ */
+    .revela { opacity: 0; transform: translateY(32px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+    .revela.visivel { opacity: 1; transform: none; }
+    .revela.atraso-1 { transition-delay: .12s; }
+    .revela.atraso-2 { transition-delay: .24s; }
+    .revela.atraso-3 { transition-delay: .36s; }
+
+    /* ============ RESPONSIVO ============ */
+    @media (max-width: 1080px) {
+      .cab-acoes .busca, .cab-acoes .idioma { display: none; }
+      .menu { gap: 0 36px; }
+      .rod-principal { grid-template-columns: 1fr 1fr; }
+      .rod-conecte { grid-column: 1 / -1; justify-content: center; }
+      .rod-conecte img { right: auto; left: calc(50% - 230px); }
+      .frentes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 860px) {
+      .cab-topo .wrap { height: 92px; }
+      .cab-logo img { width: 160px; }
+      .cab-acoes .sociais { display: none; }
+      .botao-menu { display: grid; }
+      .cab-menu { margin-top: -50px; padding-top: 50px; border-radius: 0 0 36px 36px; display: none; }
+      .cab.menu-aberto .cab-menu { display: block; }
+      .menu { flex-direction: column; height: auto; padding: 12px 24px 28px; gap: 0; }
+      .menu > li { flex-direction: column; border-bottom: 1px solid rgba(255, 255, 255, .2); }
+      .menu > li > a { padding: 16px 0; }
+      .menu > li.atual > a::after { display: none; }
+      .sub { position: static; transform: none; opacity: 1; visibility: visible; box-shadow: none; background: transparent; padding: 0 0 12px 12px; min-width: 0; border-radius: 0; }
+      .menu > li:hover .sub, .menu > li:focus-within .sub { transform: none; }
+      .sub a { padding: 10px 0; }
+      .menu > li > a .seta { display: none; }
+      .hero { margin-top: -50px; padding: 90px 0 120px; }
+      .hero .wrap, .porque-grid, .ong, .cartoes { grid-template-columns: minmax(0, 1fr); }
+      .hero-arte { justify-self: center; max-width: 440px; }
+      .ong.invertida .ong-midia { order: 0; }
+      .rod-principal { grid-template-columns: 1fr; text-align: left; }
+      .rod-conecte { justify-content: flex-start; padding-left: 0; }
+      .rod-conecte img { left: 0; width: 120px; top: -6px; }
+      .conecte-card { margin-left: 70px; padding-left: 56px; }
+      .laco-chamada { width: 380px; max-width: none; right: -190px; top: -20px; transform: translate(60px, 0) rotate(14deg); }
+      .laco-chamada.visivel { opacity: .6; transform: none; }
+      .rod-legal ul { gap: 12px 20px; }
+      .rod-legal li + li::before { display: none; }
+    }
+    @media (max-width: 520px) {
+      .frentes { grid-template-columns: minmax(0, 1fr); }
+      .numeros { grid-template-columns: minmax(0, 1fr); }
+      .cartao { gap: 14px; padding: 16px; }
+      .cartao img { width: 64px; height: 64px; border-radius: 18px; }
+      .cartao strong { font-size: 18px; }
+      .cartao span { font-size: 14px; }
+      .cartao .vai { width: 40px; height: 40px; }
+      .conecte-card h2 { font-size: 16px; }
+      .conecte-card { margin-left: 50px; padding-left: 48px; }
+      .rod-conecte img { width: 100px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .revela { opacity: 1; transform: none; }
+      .laco-chamada { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- Ícones -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M12 7.3a4.7 4.7 0 1 0 0 9.4 4.7 4.7 0 0 0 0-9.4zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21.9 8.2c-.1-1.6-.4-3-1.6-4.2S17.4 2.4 15.8 2.3C14.2 2.2 9.8 2.2 8.2 2.3 6.6 2.4 5.2 2.7 4 3.9S2.4 6.6 2.3 8.2c-.1 1.6-.1 6 0 7.6.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.6.1 6 .1 7.6 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.6.1-6 0-7.6zm-2.1 9.4a3.2 3.2 0 0 1-1.8 1.8c-1.2.5-4.2.4-5.6.4s-4.4.1-5.6-.4a3.2 3.2 0 0 1-1.8-1.8c-.5-1.2-.4-4.2-.4-5.6s-.1-4.4.4-5.6A3.2 3.2 0 0 1 6.4 4.6c1.2-.5 4.2-.4 5.6-.4s4.4-.1 5.6.4a3.2 3.2 0 0 1 1.8 1.8c.5 1.2.4 4.2.4 5.6s.1 4.4-.4 5.6z"/></symbol>
+      <symbol id="i-facebook" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></symbol>
+      <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 2h-3.3v13.4a2.9 2.9 0 1 1-2-2.8V9.3a6.2 6.2 0 1 0 5.3 6.1V8.6a7.8 7.8 0 0 0 4.4 1.4V6.7a4.4 4.4 0 0 1-4.4-4.4z"/></symbol>
+      <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2zM3.2 9h3.6v11.8H3.2zM9.1 9h3.4v1.6h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.4 4.4 5.6v6.5h-3.6v-5.8c0-1.4 0-3.1-1.9-3.1s-2.2 1.5-2.2 3v5.9H9.1z"/></symbol>
+      <symbol id="i-busca" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zM15.5 15.5 21 21"/></symbol>
+      <symbol id="i-seta" viewBox="0 0 10 10"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m1.5 3.5 3.5 3.5 3.5-3.5"/></symbol>
+      <symbol id="i-site" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></g></symbol>
+      <symbol id="i-ir" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-tel" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></g></symbol>
+      <symbol id="i-coracao" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21s-7.5-4.6-9.7-9.2C.8 8.6 2.6 4.5 6.4 4.5c2.2 0 3.6 1.2 4.6 2.6 1-1.4 2.4-2.6 4.6-2.6 3.8 0 5.6 4.1 4.1 7.3C19.5 16.4 12 21 12 21z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- ===================== CABEÇALHO ===================== -->
+  <header class="cab" id="cabecalho">
+    <div class="cab-topo">
+      <div class="wrap">
+        <a class="cab-logo" href="https://fvoalimentos.com.br/" aria-label="FVO Alimentos, página inicial">
+          <img src="assets/img/fvo-logo.png" alt="FVO Nutrindo laços" width="216" height="77">
+        </a>
+        <div class="cab-acoes">
+          <ul class="sociais" aria-label="Redes sociais da FVO">
+            <li><a href="https://www.instagram.com/fvo_alimentospet/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+            <li><a href="https://web.facebook.com/fvoalimentospet" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+            <li><a href="https://www.tiktok.com/@fvoalimentos" target="_blank" rel="noopener" aria-label="TikTok"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+            <li><a href="https://www.youtube.com/@fvoalimentos" target="_blank" rel="noopener" aria-label="YouTube"><svg aria-hidden="true"><use href="#i-youtube"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/fvo-alimentos/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          </ul>
+          <form class="busca" role="search" action="https://fvoalimentos.com.br/" method="get">
+            <label class="sr" for="busca">Pesquisar no site</label>
+            <input id="busca" type="search" name="s" placeholder="Pesquisar...">
+            <button type="submit" aria-label="Pesquisar"><svg aria-hidden="true"><use href="#i-busca"/></svg></button>
+          </form>
+          <a class="idioma" href="https://fvoalimentos.com.br/" aria-label="Idioma: Português">PT
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="#009b3a"/><path d="M10 3.2 17.4 10 10 16.8 2.6 10z" fill="#fedf00"/><circle cx="10" cy="10" r="3.6" fill="#002776"/></svg>
+          </a>
+          <button class="botao-menu" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <nav class="cab-menu" id="menu-principal" aria-label="Menu principal">
+      <ul class="menu">
+        <li class="atual tem-sub">
+          <a href="https://fvoalimentos.com.br/sobre/" aria-haspopup="true">Sobre <svg class="seta" aria-hidden="true"><use href="#i-seta"/></svg></a>
+          <ul class="sub">
+            <li><a href="https://fvoalimentos.com.br/politica-da-qualidade/">Política de Qualidade</a></li>
+            <li><a href="#conteudo" aria-current="page">Projetos Sociais</a></li>
+          </ul>
+        </li>
+        <li><a href="https://fvoalimentos.com.br/marcas/">Marcas</a></li>
+        <li class="tem-sub">
+          <a href="https://fvoalimentos.com.br/onde-comprar/" aria-haspopup="true">Onde Comprar <svg class="seta" aria-hidden="true"><use href="#i-seta"/></svg></a>
+          <ul class="sub">
+            <li><a href="https://fvoalimentos.com.br/onde-comprar/">Lojas Físicas</a></li>
+            <li><a href="https://fvoalimentos.com.br/e-commerces/">E-Commerces</a></li>
+          </ul>
+        </li>
+        <li><a href="https://fvoalimentos.com.br/blog-mundo-pet/">Blog Mundo Pet</a></li>
+        <li><a href="https://fvoalimentos.com.br/revendedores/">Revendedores</a></li>
+        <li class="tem-sub">
+          <a href="https://fvoalimentos.com.br/sac/" aria-haspopup="true">Contato <svg class="seta" aria-hidden="true"><use href="#i-seta"/></svg></a>
+          <ul class="sub">
+            <li><a href="https://fvoalimentos.com.br/sac/">SAC</a></li>
+            <li><a href="https://fvoalimentos.com.br/trabalhe-conosco/">Trabalhe conosco</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" aria-labelledby="titulo-pagina">
+      <div class="wrap">
+        <div>
+          <nav class="trilha revela" aria-label="Você está em">
+            <a href="https://fvoalimentos.com.br/">Início</a>
+            <span aria-hidden="true">›</span>
+            <a href="https://fvoalimentos.com.br/sobre/">Sobre</a>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Projetos Sociais</span>
+          </nav>
+          <p class="sobretitulo revela">Projetos Sociais</p>
+          <h1 id="titulo-pagina" class="revela atraso-1">Nutrir laços também é cuidar <span>de quem ainda não tem casa.</span></h1>
+          <p class="lead revela atraso-2">A FVO apoia ONGs que resgatam, tratam e encaminham cães e gatos para um lar. Conheça quem está com a gente nessa.</p>
+          <div class="ancoras revela atraso-3">
+            <a class="ancora" href="#bigodes"><img src="assets/img/bigodes-logo.png" alt="" width="40" height="40">Bigodes do Bunker</a>
+            <a class="ancora" href="#cao-nosso"><img src="assets/img/cao-nosso-logo.jpg" alt="" width="40" height="40">Cão Nosso</a>
+          </div>
+        </div>
+
+        <div class="hero-arte" aria-hidden="true">
+          <div class="foto-hero foto-1"><img src="assets/img/bigodes-filhotes.jpg" alt="" width="1024" height="683"></div>
+          <div class="foto-hero foto-2"><img src="assets/img/bigodes-gato-frajola.jpg" alt="" width="800" height="533"></div>
+          <div class="foto-hero foto-3"><img src="assets/img/bigodes-gato-laranja.jpg" alt="" width="800" height="533"></div>
+        </div>
+      </div>
+      <svg class="onda" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path fill="#001f7c" d="M0 70 C 240 10, 480 10, 720 55 C 960 100, 1200 110, 1440 40 L 1440 120 L 0 120 Z"/></svg>
+    </section>
+
+    <!-- ===================== POR QUE ===================== -->
+    <section class="porque" aria-labelledby="titulo-porque">
+      <div class="wrap">
+        <div class="porque-grid">
+          <h2 id="titulo-porque" class="revela">Por que a FVO <strong>apoia ONGs</strong></h2>
+          <div class="texto revela atraso-1">
+            <p>Há 59 anos a gente fala de casa, de família e de confiança. Mas muitos cães e gatos ainda estão do lado de fora, esperando alguém.</p>
+            <p>Quem cuida deles todos os dias são ONGs e protetores que trabalham com pouco recurso e muita dedicação. Estar perto desse trabalho faz parte do nosso compromisso com o bem-estar animal.</p>
+          </div>
+        </div>
+        <ul class="frentes" aria-label="O que as ONGs parceiras fazem">
+          <li class="revela">
+            <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5M10 20v-5h4v5"/></svg></div>
+            <h3>Resgate</h3>
+            <p>Animais abandonados ganham abrigo e uma segunda chance.</p>
+          </li>
+          <li class="revela atraso-1">
+            <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 20s-7-4.3-8.8-8.6C1.9 8.4 3.6 5 7 5c2 0 3.3 1.1 5 3 1.7-1.9 3-3 5-3 3.4 0 5.1 3.4 3.8 6.4C19 15.7 12 20 12 20zM12 10v5M9.5 12.5h5"/></svg></div>
+            <h3>Cuidado</h3>
+            <p>Atendimento veterinário, alimentação e conforto, inclusive no frio.</p>
+          </li>
+          <li class="revela atraso-2">
+            <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16.5 10a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zM2.5 19c.5-3.2 2.7-5 5.5-5s5 1.8 5.5 5M14 14.3c.8-.3 1.6-.5 2.5-.5 2.4 0 4.3 1.6 4.8 4.7"/></svg></div>
+            <h3>Rede de apoio</h3>
+            <p>Lares temporários e suporte a protetores de comunidades.</p>
+          </li>
+          <li class="revela atraso-3">
+            <div class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM12 17s-3.2-2-3.9-3.9c-.6-1.4.2-3 1.7-3 .9 0 1.6.5 2.2 1.2.6-.7 1.3-1.2 2.2-1.2 1.5 0 2.3 1.6 1.7 3C15.2 15 12 17 12 17z"/></svg></div>
+            <h3>Adoção responsável</h3>
+            <p>Cada animal segue para uma família preparada para recebê-lo.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== ONGS ===================== -->
+    <section class="ongs" aria-labelledby="titulo-ongs">
+      <div class="wrap">
+        <div class="ongs-cabeca">
+          <p class="sobretitulo revela">ONGs parceiras</p>
+          <h2 id="titulo-ongs" class="revela atraso-1">Quem está <span>com a gente</span></h2>
+        </div>
+
+        <!-- Bigodes do Bunker -->
+        <article class="ong revela" id="bigodes" aria-labelledby="ong-bigodes">
+          <div class="ong-midia">
+            <div class="mosaico">
+              <figure class="grande"><img src="assets/img/bigodes-filhotes.jpg" alt="Dois filhotes de gato, um siamês e um laranja, abraçados dentro de uma toca azul" width="1024" height="683" loading="lazy"></figure>
+              <figure class="mini"><img src="assets/img/bigodes-bunker.jpg" alt="Gata tricolor sobre um arranhador no espaço da Bigodes, com outros gatos ao fundo" width="1024" height="683" loading="lazy"></figure>
+              <figure class="mini"><img src="assets/img/bigodes-gato-laranja.jpg" alt="Gato laranja olhando para cima" width="800" height="533" loading="lazy"></figure>
+              <figure class="mini"><img src="assets/img/bigodes-gato-frajola.jpg" alt="Gato preto e branco deitado sobre uma manta azul" width="800" height="533" loading="lazy"></figure>
+            </div>
+            <span class="selo"><svg aria-hidden="true"><use href="#i-coracao"/></svg>Fotos: Bigodes do Bunker</span>
+          </div>
+          <div class="ong-info">
+            <div class="ong-cabeca">
+              <img class="ong-logo" src="assets/img/bigodes-logo.png" alt="Logo da Bigodes do Bunker" width="92" height="92">
+              <div>
+                <h3 id="ong-bigodes">Bigodes do Bunker</h3>
+                <ul class="chips" aria-label="Sobre a ONG">
+                  <li>Rio de Janeiro (RJ)</li>
+                  <li>Gatos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="numeros">
+              <div class="numero"><strong>2011</strong><span>ano em que a associação nasceu</span></div>
+              <div class="numero"><strong>+3 mil</strong><span>gatos doados, segundo a associação</span></div>
+            </div>
+            <div class="texto">
+              <p>A Bigodes do Bunker nasceu depois das chuvas que atingiram a Região Serrana do Rio de Janeiro e deixaram muitas pessoas e animais sem abrigo. Naquele cenário, ficou impossível não enxergar o abandono que os animais enfrentam todos os dias, com ou sem tragédia.</p>
+              <p>Desde então, a associação resgata, cuida e encaminha gatos para adoção responsável, inclusive filhotes e idosos. Cada gato que passa por lá recebe abrigo, atendimento veterinário, alimentação e a chance de encontrar uma família.</p>
+            </div>
+            <blockquote>
+              <p>Sabemos que não vamos mudar essa realidade sozinhos, e que o avanço acontece aos poucos.</p>
+              <footer>Bigodes do Bunker</footer>
+            </blockquote>
+            <div>
+              <p class="ajuda-titulo">Como ajudar a Bigodes</p>
+              <p class="ajuda-texto">Escolha uma forma de ajudar e siga para o site da associação.</p>
+              <div class="pilulas">
+                <a class="pilula" href="https://bigodesdobunker.com.br/adote/" target="_blank" rel="noopener">Adotar</a>
+                <a class="pilula" href="https://bigodesdobunker.com.br/lar-temporario/" target="_blank" rel="noopener">Ser lar temporário</a>
+                <a class="pilula" href="https://bigodesdobunker.com.br/voluntarie-se/" target="_blank" rel="noopener">Ser voluntário</a>
+                <a class="pilula" href="https://bigodesdobunker.com.br/contribua/" target="_blank" rel="noopener">Doar</a>
+              </div>
+            </div>
+            <div class="botoes">
+              <a class="botao" href="https://bigodesdobunker.com.br/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-site"/></svg>Visitar o site</a>
+              <a class="botao escuro" href="https://www.instagram.com/bigodesdobunker/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-instagram"/></svg>@bigodesdobunker</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Cão Nosso -->
+        <article class="ong invertida revela" id="cao-nosso" aria-labelledby="ong-cao-nosso">
+          <div class="ong-midia">
+            <div class="polaroides">
+              <a href="https://www.instagram.com/caonossorj/p/Ddzo54SiWyp/" target="_blank" rel="noopener" aria-label="Ver no Instagram: Gigi, adotada"><img src="assets/img/cao-nosso-gigi.jpg" alt="Post da Cão Nosso: a cachorra Gigi, adotada, com seus novos tutores" width="640" height="640" loading="lazy"></a>
+              <a href="https://www.instagram.com/caonossorj/p/DdkMwj7JAUE/" target="_blank" rel="noopener" aria-label="Ver no Instagram: Manu, adotada"><img src="assets/img/cao-nosso-manu.jpg" alt="Post da Cão Nosso: a cachorra Manu, adotada, com seus novos tutores" width="640" height="640" loading="lazy"></a>
+              <a href="https://www.instagram.com/caonossorj/p/DdAEuvHiWwS/" target="_blank" rel="noopener" aria-label="Ver no Instagram: Bela, adotada"><img src="assets/img/cao-nosso-bela.jpg" alt="Post da Cão Nosso: a cachorra Bela, adotada, no colo da nova tutora" width="640" height="640" loading="lazy"></a>
+              <a href="https://www.instagram.com/caonossorj/p/Dc69B10CTe8/" target="_blank" rel="noopener" aria-label="Ver no Instagram: Docinho, adotado"><img src="assets/img/cao-nosso-docinho.jpg" alt="Post da Cão Nosso: o cachorro Docinho, adotado, no colo da nova tutora" width="640" height="640" loading="lazy"></a>
+            </div>
+            <p class="credito">Finais felizes publicados no Instagram @caonossorj</p>
+          </div>
+          <div class="ong-info">
+            <div class="ong-cabeca">
+              <img class="ong-logo cheio" src="assets/img/cao-nosso-logo.jpg" alt="Logo da Cão Nosso" width="92" height="92">
+              <div>
+                <h3 id="ong-cao-nosso">Cão Nosso</h3>
+                <ul class="chips" aria-label="Sobre a ONG">
+                  <li>Rio de Janeiro (RJ)</li>
+                  <li>Cães</li>
+                </ul>
+              </div>
+            </div>
+            <div class="numeros">
+              <div class="numero"><strong>2021</strong><span>fundada oficialmente em agosto</span></div>
+              <div class="numero"><strong>100%</strong><span>voluntária, sem funcionários remunerados</span></div>
+            </div>
+            <div class="texto">
+              <p>A Cão Nosso tem uma missão que pouca gente vê: apoiar protetores independentes e de baixa renda que cuidam de cães em favelas e comunidades carentes.</p>
+              <p>Em vez de manter um abrigo tradicional, a ONG trabalha com lares temporários e leva ajuda para quem já está na linha de frente. Cada doação recebida, seja ração FVO, remédio ou suprimento, vai direto para esses protetores.</p>
+              <p>No frio, o trabalho fica ainda mais urgente. A Cão Nosso arrecada e distribui ração, medicamentos, paninhos e caminhas, e dá suporte para que os protetores consigam cuidar de muitos animais ao mesmo tempo.</p>
+            </div>
+            <blockquote>
+              <p>A gente sabe que os cães estão nesses lugares, nas ruas, e a gente começou a ampliar os braços da ONG para ajudar esses protetores a dar conta dos seus cães.</p>
+              <footer>Edna, cofundadora da Cão Nosso</footer>
+            </blockquote>
+            <div>
+              <p class="ajuda-titulo">Como ajudar a Cão Nosso</p>
+              <p class="ajuda-texto">Escolha uma forma de ajudar e fale com a ONG pelo Instagram.</p>
+              <div class="pilulas">
+                <a class="pilula" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener">Doar ração</a>
+                <a class="pilula" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener">Doar remédios</a>
+                <a class="pilula" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener">Doar caminhas</a>
+                <a class="pilula" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener">Ser lar temporário</a>
+              </div>
+            </div>
+            <div class="botoes">
+              <a class="botao escuro" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-instagram"/></svg>@caonossorj</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== CHAMADA ===================== -->
+    <section class="chamada" aria-labelledby="titulo-chamada">
+      <svg class="onda-topo" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path fill="#f2f5f7" d="M0 0 H1440 V30 C 1200 90, 960 80, 720 45 C 480 10, 240 10, 0 50 Z"/></svg>
+      <div class="laco-chamada" aria-hidden="true"><img src="assets/img/laco.png" alt="" width="1100" height="1088" loading="lazy"></div>
+      <div class="wrap">
+        <div class="chamada-cabeca">
+          <h2 id="titulo-chamada" class="revela">Quer ajudar <strong>também?</strong></h2>
+          <p class="revela atraso-1">Adotar, ser lar temporário, doar ou dar um pouco do seu tempo. Qualquer ajuda faz diferença, e o melhor caminho é falar direto com as ONGs pelos canais oficiais delas.</p>
+        </div>
+        <div class="cartoes">
+          <a class="cartao revela" href="https://bigodesdobunker.com.br/" target="_blank" rel="noopener">
+            <img src="assets/img/bigodes-gato-frajola.jpg" alt="" width="92" height="92" loading="lazy">
+            <div><strong>Ajudar a Bigodes</strong><span>Adoção, lar temporário, voluntariado e doações</span></div>
+            <span class="vai" aria-hidden="true"><svg><use href="#i-ir"/></svg></span>
+          </a>
+          <a class="cartao revela atraso-1" href="https://www.instagram.com/caonossorj/" target="_blank" rel="noopener">
+            <img src="assets/img/cao-nosso-bela.jpg" alt="" width="92" height="92" loading="lazy">
+            <div><strong>Ajudar a Cão Nosso</strong><span>Doações e lar temporário pelo Instagram</span></div>
+            <span class="vai" aria-hidden="true"><svg><use href="#i-ir"/></svg></span>
+          </a>
+        </div>
+        <p class="aviso">A FVO não recebe doações em nome das ONGs parceiras.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="rod">
+    <div class="wrap rod-principal">
+      <div class="rod-logo">
+        <a href="https://fvoalimentos.com.br/" aria-label="FVO Alimentos, página inicial"><img src="assets/img/fvo-logo.png" alt="FVO Nutrindo laços" width="160" height="57"></a>
+        <a class="ra" href="https://www.reclameaqui.com.br/" target="_blank" rel="noopener">Procure nossa<br>empresa no<img src="assets/img/reclame-aqui.svg" alt="Reclame AQUI" width="118" height="22"></a>
+      </div>
+      <ul class="rod-links">
+        <li><a href="https://fvoalimentos.com.br/sobre/">Sobre a FVO</a></li>
+        <li><a href="https://fvoalimentos.com.br/marcas/">Nossas Marcas</a></li>
+        <li><a href="https://fvoalimentos.com.br/revendedores/">Revendedores</a></li>
+        <li><a href="https://fvoalimentos.com.br/onde-comprar/">Onde Encontrar</a></li>
+        <li><a href="https://fvoalimentos.com.br/blog-mundo-pet/">Blog Mundo Pet</a></li>
+      </ul>
+      <div class="rod-contato">
+        <h2>Canal de atendimento</h2>
+        <a class="tel" href="tel:08000612105"><span class="ic"><svg aria-hidden="true"><use href="#i-tel"/></svg></span>0800 061 2105</a>
+        <a class="mail" href="mailto:sac@fvoalimentos.com.br"><span class="ic"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>sac@fvoalimentos.com.br</a>
+        <p>De segunda a sexta,<br>das 8h às 16h40, exceto feriados.</p>
+      </div>
+      <div class="rod-conecte">
+        <img src="assets/img/footer-pet.png" alt="" width="150" height="268" loading="lazy">
+        <div class="conecte-card">
+          <h2>Conecte-se com a FVO</h2>
+          <ul class="sociais" aria-label="Redes sociais da FVO">
+            <li><a href="https://www.instagram.com/fvo_alimentospet/" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+            <li><a href="https://web.facebook.com/fvoalimentospet" target="_blank" rel="noopener" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+            <li><a href="https://www.tiktok.com/@fvoalimentos" target="_blank" rel="noopener" aria-label="TikTok"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></a></li>
+            <li><a href="https://www.youtube.com/@fvoalimentos" target="_blank" rel="noopener" aria-label="YouTube"><svg aria-hidden="true"><use href="#i-youtube"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/company/fvo-alimentos/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <nav class="rod-legal" aria-label="Políticas">
+      <ul>
+        <li><a href="https://fvoalimentos.com.br/termos-de-uso/">Termos de uso</a></li>
+        <li><a href="https://fvoalimentos.com.br/politica-de-privacidade/">Política de privacidade</a></li>
+        <li><a href="https://fvoalimentos.com.br/politica-de-cookies/">Política de cookies</a></li>
+        <li><a href="https://fvoalimentos.com.br/politica-da-qualidade/">Política de qualidade</a></li>
+        <li><a href="https://fvoalimentos.com.br/politica-de-100-de-satisfacao-fvo-alimentos/">Política de satisfação</a></li>
+        <li><a href="https://fvoalimentos.com.br/politica-de-sustentabilidade/">Política de sustentabilidade</a></li>
+        <li><a href="https://fvoalimentos.com.br/comunicado-xprime/">Comunicado X-Prime</a></li>
+      </ul>
+    </nav>
+    <p class="rod-copy">©Copyright 2025 * FVO Alimentos® – Todos os direitos reservados | Designed by Mais Packing</p>
+  </footer>
+
+  <script>
+    (function () {
+      var cab = document.getElementById('cabecalho');
+      var botao = cab.querySelector('.botao-menu');
+      botao.addEventListener('click', function () {
+        var aberto = cab.classList.toggle('menu-aberto');
+        botao.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+        botao.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+      });
+
+      // Submenus no toque: primeiro toque abre, segundo segue o link
+      var toque = window.matchMedia('(hover: none)').matches;
+      cab.querySelectorAll('.tem-sub > a').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (!toque || window.innerWidth <= 860) return;
+          var li = link.parentElement;
+          if (!li.classList.contains('aberto')) {
+            e.preventDefault();
+            cab.querySelectorAll('.tem-sub.aberto').forEach(function (x) { x.classList.remove('aberto'); });
+            li.classList.add('aberto');
+          }
+        });
+      });
+      document.addEventListener('click', function (e) {
+        if (!cab.contains(e.target)) cab.querySelectorAll('.tem-sub.aberto').forEach(function (x) { x.classList.remove('aberto'); });
+      });
+
+      var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Revelar ao rolar
+      var alvos = document.querySelectorAll('.revela, .laco-chamada');
+      if ('IntersectionObserver' in window && !reduz) {
+        var io = new IntersectionObserver(function (entradas) {
+          entradas.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add('visivel'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        alvos.forEach(function (el) { io.observe(el); });
+      } else {
+        alvos.forEach(function (el) { el.classList.add('visivel'); });
+      }
+
+    })();
+  </script>
+</body>
+</html>
